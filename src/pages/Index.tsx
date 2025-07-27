@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import MovieCard from "@/components/MovieCard";
@@ -9,6 +10,7 @@ import { movies, categories, theaters, mockUser } from "@/data/mockData";
 import { MapPin, Star, Monitor } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(mockUser);
   const [selectedCategory, setSelectedCategory] = useState("now-showing");
 
@@ -22,8 +24,7 @@ const Index = () => {
   };
 
   const handleBookNow = (movieId: string) => {
-    console.log("Book movie:", movieId);
-    // In a real app, this would navigate to booking flow
+    navigate(`/movie/${movieId}`);
   };
 
   const filteredMovies = selectedCategory === "now-showing" 
@@ -109,7 +110,10 @@ const Index = () => {
                       </Badge>
                     ))}
                   </div>
-                  <Button className="w-full bg-gradient-primary hover:shadow-primary">
+                  <Button 
+                    className="w-full bg-gradient-primary hover:shadow-primary"
+                    onClick={() => navigate('/theaters')}
+                  >
                     View Showtimes
                   </Button>
                 </div>

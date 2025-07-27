@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -41,24 +42,30 @@ export default function Header({
     <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Film className="h-8 w-8 text-primary" />
           <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
             CineBook
           </span>
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
-          <Button variant="ghost" className="text-foreground hover:text-primary">
-            Movies
-          </Button>
-          <Button variant="ghost" className="text-foreground hover:text-primary">
-            Theaters
-          </Button>
-          <Button variant="ghost" className="text-foreground hover:text-primary">
-            Offers
-          </Button>
+          <Link to="/">
+            <Button variant="ghost" className="text-foreground hover:text-primary">
+              Movies
+            </Button>
+          </Link>
+          <Link to="/theaters">
+            <Button variant="ghost" className="text-foreground hover:text-primary">
+              Theaters
+            </Button>
+          </Link>
+          <Link to="/offers">
+            <Button variant="ghost" className="text-foreground hover:text-primary">
+              Offers
+            </Button>
+          </Link>
         </nav>
 
         {/* Search */}

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -22,8 +23,13 @@ interface MovieCardProps {
 }
 
 export default function MovieCard({ movie, onBookNow }: MovieCardProps) {
+  const navigate = useNavigate();
+  
   return (
-    <Card className="group relative overflow-hidden border-none bg-gradient-card hover:shadow-primary transition-all duration-300 hover:scale-105">
+    <Card 
+      className="group relative overflow-hidden border-none bg-gradient-card hover:shadow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+      onClick={() => navigate(`/movie/${movie.id}`)}
+    >
       {/* Movie Poster */}
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
@@ -53,7 +59,10 @@ export default function MovieCard({ movie, onBookNow }: MovieCardProps) {
         {/* Hover Content */}
         <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <Button 
-            onClick={() => onBookNow?.(movie.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onBookNow?.(movie.id);
+            }}
             className="w-full bg-gradient-primary hover:shadow-glow"
           >
             Book Now
